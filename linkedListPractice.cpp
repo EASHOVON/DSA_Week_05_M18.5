@@ -15,6 +15,24 @@ public:
     }
 };
 
+// Function Initialization
+void display(Node *n);
+int countLength(Node *&head);
+void insertAtHead(Node *&head, int value);
+
+// Function Making
+void display(Node *n)
+{
+    while (n != NULL)
+    {
+        cout << n->value;
+        if (n->Next != NULL)
+            cout << " -> ";
+        n = n->Next;
+    }
+    cout << endl
+         << endl;
+}
 int main()
 {
     Node *head = NULL;
@@ -40,7 +58,9 @@ int main()
         switch (choice)
         {
         case 1:
-            /* code */
+            cout << "Enter the Value: ";
+            cin >> value;
+            insertAtHead(head, value);
             break;
 
         case 2:
