@@ -46,6 +46,13 @@ int countLength(Node *&head)
     return count;
 }
 
+void insertAtHead(Node *&head, int value)
+{
+    Node *newNode = new Node(value);
+    newNode->Next = head;
+    head = newNode;
+}
+
 int main()
 {
     Node *head = NULL;
@@ -123,6 +130,12 @@ int main()
         default:
             break;
         }
+        cout << "Next Choice: ";
+        cin >> choice;
     }
+    cout << endl
+         << "Linked List: ";
+    display(head);
+    cout << "Length of the list: " << countLength(head) << endl;
     return 0;
 }
