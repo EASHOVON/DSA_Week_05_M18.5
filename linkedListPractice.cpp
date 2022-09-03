@@ -19,6 +19,7 @@ public:
 void display(Node *n);
 int countLength(Node *&head);
 void insertAtHead(Node *&head, int value);
+void insertAtTail(Node *&head, int value);
 
 // Function Making
 void display(Node *n)
@@ -53,12 +54,28 @@ void insertAtHead(Node *&head, int value)
     head = newNode;
 }
 
+void insertAtTail(Node *&head, int value)
+{
+    Node *newNode = new Node(value);
+    if (head == NULL)
+    {
+        head = newNode;
+        return;
+    }
+    Node *temp = head;
+    while (temp->Next != NULL)
+    {
+        temp = temp->Next;
+    }
+    temp->Next = newNode;
+}
+
 int main()
 {
     Node *head = NULL;
     int value, choice;
     cout << "Choice 1: Insertion at Head" << endl
-         << "Choice 2: Insertion at Head" << endl
+         << "Choice 2: Insertion at Tail" << endl
          << "Choice 3: Insertion at Specific Position" << endl
          << "Choice 4: Search a value (Unique List)" << endl
          << "Choice 5: Search a value (Duplication Enabled List)" << endl
@@ -84,7 +101,9 @@ int main()
             break;
 
         case 2:
-            /* code */
+            cout << "Enter the Value: ";
+            cin >> value;
+            insertAtTail(head, value);
             break;
 
         case 3:
