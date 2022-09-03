@@ -15,6 +15,11 @@ public:
     }
 };
 
+struct Test
+{
+    int position[1000];
+};
+
 // Function Initialization
 void display(Node *n);
 int countLength(Node *&head);
@@ -22,6 +27,7 @@ void insertAtHead(Node *&head, int value);
 void insertAtTail(Node *&head, int value);
 void insertAtSpecificPosition(Node *&head, int position, int value);
 int searchByValueUnique(Node *&head, int value);
+Test searchByValueDuplicateReturn(Node *&head, int value);
 
 // Function Making
 void display(Node *n)
@@ -107,6 +113,26 @@ int searchByValueUnique(Node *&head, int value)
     return count;
 }
 
+Test searchByValueDuplicateReturn(Node *&head, int value)
+{
+    Node *temp = head;
+    Test T;
+    int k = 1;
+    int count = 1;
+    while (temp != NULL)
+    {
+        if (temp->value == value)
+        {
+            T.position[k] = count;
+            k++;
+        }
+        temp = temp->Next;
+        count++;
+    }
+    T.position[0] = k;
+    return T;
+}
+
 int main()
 {
     Node *head = NULL;
@@ -165,7 +191,26 @@ int main()
             break;
 
         case 5:
-            /* code */
+            cout << "Enter the value to search: ";
+            cin >> value;
+            Test T;
+            T = searchByValueDuplicateReturn(head, value);
+            if (T.position[0] == 1)
+            {
+                cout << "The Searched Value is not yet in the list" << endl;
+            }
+            else
+            {
+                int size = T.position[0];
+                cout << "The value is at position: ";
+                for (int i = 1; i < size; i++)
+                {
+                    cout << T.position[i];
+                    if (i < size - 1)
+                        cout << ",";
+                }
+                cout << endl;
+            }
             break;
 
         case 6:
