@@ -21,6 +21,7 @@ int countLength(Node *&head);
 void insertAtHead(Node *&head, int value);
 void insertAtTail(Node *&head, int value);
 void insertAtSpecificPosition(Node *&head, int position, int value);
+int searchByValueUnique(Node *&head, int value);
 
 // Function Making
 void display(Node *n)
@@ -86,6 +87,26 @@ void insertAtSpecificPosition(Node *&head, int position, int value)
     temp->Next = newNode;
 }
 
+int searchByValueUnique(Node *&head, int value)
+{
+    Node *temp = head;
+    int count = 1;
+    if (head == NULL)
+    {
+        return -1;
+    }
+    while (temp->value != value)
+    {
+        if (temp->Next == NULL)
+        {
+            return -1;
+        }
+        temp = temp->Next;
+        count++;
+    }
+    return count;
+}
+
 int main()
 {
     Node *head = NULL;
@@ -129,9 +150,18 @@ int main()
             cin >> value;
             insertAtSpecificPosition(head, position, value);
             break;
-
         case 4:
-            /* code */
+            cout << "Enter the value to search: ";
+            cin >> value;
+            position = searchByValueUnique(head, value);
+            if (position != -1)
+            {
+                cout << "The number is at position " << position << endl;
+            }
+            else
+            {
+                cout << "The number is not yet the list" << endl;
+            }
             break;
 
         case 5:
