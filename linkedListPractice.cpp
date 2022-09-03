@@ -20,6 +20,7 @@ void display(Node *n);
 int countLength(Node *&head);
 void insertAtHead(Node *&head, int value);
 void insertAtTail(Node *&head, int value);
+void insertAtSpecificPosition(Node *&head, int position, int value);
 
 // Function Making
 void display(Node *n)
@@ -70,10 +71,25 @@ void insertAtTail(Node *&head, int value)
     temp->Next = newNode;
 }
 
+void insertAtSpecificPosition(Node *&head, int position, int value)
+{
+    int i = 0;
+    Node *newNode = new Node(value);
+    Node *temp = head;
+    while (i < position - 2)
+    {
+        temp = temp->Next;
+        i++;
+    }
+
+    newNode->Next = temp->Next;
+    temp->Next = newNode;
+}
+
 int main()
 {
     Node *head = NULL;
-    int value, choice;
+    int value, choice, position;
     cout << "Choice 1: Insertion at Head" << endl
          << "Choice 2: Insertion at Tail" << endl
          << "Choice 3: Insertion at Specific Position" << endl
@@ -107,7 +123,11 @@ int main()
             break;
 
         case 3:
-            /* code */
+            cout << "Enter the Desired Position: ";
+            cin >> position;
+            cout << "Enter the Value: ";
+            cin >> value;
+            insertAtSpecificPosition(head, position, value);
             break;
 
         case 4:
