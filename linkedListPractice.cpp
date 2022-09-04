@@ -34,6 +34,7 @@ void deletionAtHead(Node *&head);
 void deletionAtTail(Node *&head);
 void deletionAtSpecificPosition(Node *&head, int pos);
 void deletionByValueUnique(Node *&head, int target);
+void deletionByValueDuplicate(Node *&head, int target);
 
 // Function Making
 void display(Node *n)
@@ -251,6 +252,26 @@ void deletionByValueUnique(Node *&head, int target)
     }
 }
 
+void deletionByValueDuplicate(Node *&head, int target)
+{
+    Test positions;
+    positions = searchByValueDuplicateReturn(head, target);
+    if (positions.arr[0] == 0)
+    {
+        cout << "Linked List is empty!" << endl;
+        return;
+    }
+    int len = positions.arr[0];
+    for (int i = 1; i < len; i++)
+    {
+        deletionAtSpecificPosition(head, positions.arr[i]);
+        for (int j = i; j < len; j++)
+        {
+            positions.arr[j]--;
+        }
+    }
+}
+
 int main()
 {
     Node *head = NULL;
@@ -371,7 +392,9 @@ int main()
             break;
 
         case 12:
-            /* code */
+            cout << "Enter the Value you want to delete: ";
+            cin >> delValue;
+            deletionByValueDuplicate(head, delValue);
             break;
 
         default:
