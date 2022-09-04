@@ -33,6 +33,7 @@ void insertionAfterSpecificValueDuplicate(Node *&head, int key, int newValue);
 void deletionAtHead(Node *&head);
 void deletionAtTail(Node *&head);
 void deletionAtSpecificPosition(Node *&head, int pos);
+void deletionByValueUnique(Node *&head, int target);
 
 // Function Making
 void display(Node *n)
@@ -237,6 +238,19 @@ void deletionAtSpecificPosition(Node *&head, int pos)
     }
 }
 
+void deletionByValueUnique(Node *&head, int target)
+{
+    int position = searchByValueUnique(head, target);
+    if (position == -1)
+    {
+        cout << "Value Not Found in the linked list" << endl;
+    }
+    else
+    {
+        deletionAtSpecificPosition(head, position);
+    }
+}
+
 int main()
 {
     Node *head = NULL;
@@ -350,7 +364,10 @@ int main()
             break;
 
         case 11:
-            /* code */
+            cout << "Enter the value to delete: ";
+            int delValue;
+            cin >> delValue;
+            deletionByValueUnique(head, delValue);
             break;
 
         case 12:
