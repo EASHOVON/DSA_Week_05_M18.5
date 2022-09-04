@@ -17,7 +17,7 @@ public:
 
 struct Test
 {
-    int position[1000];
+    int arr[1000];
 };
 
 // Function Initialization
@@ -29,6 +29,7 @@ void insertAtSpecificPosition(Node *&head, int position, int value);
 int searchByValueUnique(Node *&head, int value);
 Test searchByValueDuplicateReturn(Node *&head, int value);
 void insertAfterSpecificValueUnique(Node *&head, int target, int value);
+void insertionAfterSpecificValueDuplicate(Node *&head, int key, int newValue);
 
 // Function Making
 void display(Node *n)
@@ -124,13 +125,13 @@ Test searchByValueDuplicateReturn(Node *&head, int value)
     {
         if (temp->value == value)
         {
-            T.position[k] = count;
+            T.arr[k] = count;
             k++;
         }
         temp = temp->Next;
         count++;
     }
-    T.position[0] = k;
+    T.arr[0] = k;
     return T;
 }
 
@@ -139,6 +140,26 @@ void insertAfterSpecificValueUnique(Node *&head, int target, int value)
     int position = searchByValueUnique(head, target);
 
     insertAtSpecificPosition(head, position + 1, value);
+}
+
+void insertionAfterSpecificValueDuplicate(Node *&head, int key, int newValue)
+{
+    Test positions;
+    positions = searchByValueDuplicateReturn(head, key);
+    if (positions.arr[0] == 0)
+    {
+        cout << "List is Empty!" << endl;
+        return;
+    }
+    int len = positions.arr[0];
+    for (int i = 1; i < len; i++)
+    {
+        insertAtSpecificPosition(head, positions.arr[i] + 1, newValue);
+        for (int j = i; j < len; j++)
+        {
+            positions.arr[j]++;
+        }
+    }
 }
 
 int main()
@@ -203,17 +224,17 @@ int main()
             cin >> value;
             Test T;
             T = searchByValueDuplicateReturn(head, value);
-            if (T.position[0] == 1)
+            if (T.arr[0] == 1)
             {
                 cout << "The Searched Value is not yet in the list" << endl;
             }
             else
             {
-                int size = T.position[0];
+                int size = T.arr[0];
                 cout << "The value is at position: ";
                 for (int i = 1; i < size; i++)
                 {
-                    cout << T.position[i];
+                    cout << T.arr[i];
                     if (i < size - 1)
                         cout << ",";
                 }
@@ -231,7 +252,12 @@ int main()
             break;
 
         case 7:
-            /* code */
+            cout << "Enter the Search Value (Duplication Enabled): ";
+            cin >> value;
+            int newValue;
+            cout << "Enter the new Value (Duplication Enabled): ";
+            cin >> newValue;
+            insertionAfterSpecificValueDuplicate(head, value, newValue);
             break;
 
         case 8:
