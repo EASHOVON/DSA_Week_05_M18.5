@@ -30,6 +30,7 @@ int searchByValueUnique(Node *&head, int value);
 Test searchByValueDuplicateReturn(Node *&head, int value);
 void insertAfterSpecificValueUnique(Node *&head, int target, int value);
 void insertionAfterSpecificValueDuplicate(Node *&head, int key, int newValue);
+void deletionAtHead(Node *&head);
 
 // Function Making
 void display(Node *n)
@@ -162,6 +163,20 @@ void insertionAfterSpecificValueDuplicate(Node *&head, int key, int newValue)
     }
 }
 
+void deletionAtHead(Node *&head)
+{
+    Node *temp = head;
+    if (temp != NULL)
+    {
+        head = temp->Next;
+        delete temp;
+    }
+    else
+    {
+        cout << "There is no value in the liked list!" << endl;
+    }
+}
+
 int main()
 {
     Node *head = NULL;
@@ -265,7 +280,7 @@ int main()
             break;
 
         case 9:
-            /* code */
+            deletionAtHead(head);
             break;
 
         case 10:
