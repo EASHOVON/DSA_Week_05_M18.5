@@ -32,6 +32,7 @@ void insertAfterSpecificValueUnique(Node *&head, int target, int value);
 void insertionAfterSpecificValueDuplicate(Node *&head, int key, int newValue);
 void deletionAtHead(Node *&head);
 void deletionAtTail(Node *&head);
+void deletionAtSpecificPosition(Node *&head, int pos);
 
 // Function Making
 void display(Node *n)
@@ -204,6 +205,38 @@ void deletionAtTail(Node *&head)
     }
 }
 
+void deletionAtSpecificPosition(Node *&head, int pos)
+{
+    if (pos <= countLength(head))
+    {
+        if (pos == 1)
+        {
+            deletionAtHead(head);
+        }
+        else if (pos == countLength(head))
+        {
+            deletionAtTail(head);
+        }
+        else
+        {
+            Node *temp = head;
+            int i = 1;
+            while (i < pos - 1)
+            {
+                temp = temp->Next;
+                i++;
+            }
+            Node *delNode = temp->Next;
+            temp->Next = delNode->Next;
+            delete delNode;
+        }
+    }
+    else
+    {
+        cout << "Position Out of Bound!" << endl;
+    }
+}
+
 int main()
 {
     Node *head = NULL;
@@ -311,7 +344,9 @@ int main()
             break;
 
         case 10:
-            /* code */
+            cout << "Enter the desired position: ";
+            cin >> position;
+            deletionAtSpecificPosition(head, position);
             break;
 
         case 11:
