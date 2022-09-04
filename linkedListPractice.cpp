@@ -31,6 +31,7 @@ Test searchByValueDuplicateReturn(Node *&head, int value);
 void insertAfterSpecificValueUnique(Node *&head, int target, int value);
 void insertionAfterSpecificValueDuplicate(Node *&head, int key, int newValue);
 void deletionAtHead(Node *&head);
+void deletionAtTail(Node *&head);
 
 // Function Making
 void display(Node *n)
@@ -177,6 +178,32 @@ void deletionAtHead(Node *&head)
     }
 }
 
+void deletionAtTail(Node *&head)
+{
+    Node *temp = head;
+    if (temp != NULL && temp->Next != NULL)
+    {
+        while (temp->Next->Next != NULL)
+        {
+            temp = temp->Next;
+        }
+        Node *delNode = temp->Next;
+        temp->Next = NULL;
+        delete delNode;
+    }
+    else
+    {
+        if (temp == NULL)
+        {
+            cout << "There is no value in the linked list!" << endl;
+        }
+        else
+        {
+            deletionAtHead(head);
+        }
+    }
+}
+
 int main()
 {
     Node *head = NULL;
@@ -276,11 +303,11 @@ int main()
             break;
 
         case 8:
-            /* code */
+            deletionAtHead(head);
             break;
 
         case 9:
-            deletionAtHead(head);
+            deletionAtTail(head);
             break;
 
         case 10:
