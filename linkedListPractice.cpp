@@ -28,6 +28,7 @@ void insertAtTail(Node *&head, int value);
 void insertAtSpecificPosition(Node *&head, int position, int value);
 int searchByValueUnique(Node *&head, int value);
 Test searchByValueDuplicateReturn(Node *&head, int value);
+void insertAfterSpecificValueUnique(Node *&head, int target, int value);
 
 // Function Making
 void display(Node *n)
@@ -133,6 +134,13 @@ Test searchByValueDuplicateReturn(Node *&head, int value)
     return T;
 }
 
+void insertAfterSpecificValueUnique(Node *&head, int target, int value)
+{
+    int position = searchByValueUnique(head, target);
+
+    insertAtSpecificPosition(head, position + 1, value);
+}
+
 int main()
 {
     Node *head = NULL;
@@ -214,7 +222,12 @@ int main()
             break;
 
         case 6:
-            /* code */
+            cout << "Enter the value to Search: ";
+            int searchValue;
+            cin >> searchValue;
+            cout << "Enter the value to insert: ";
+            cin >> value;
+            insertAfterSpecificValueUnique(head, searchValue, value);
             break;
 
         case 7:
